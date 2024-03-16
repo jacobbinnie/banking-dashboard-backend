@@ -9,6 +9,7 @@ import { AccountType, TransactionStatusEnum, UsageType } from 'src/types/index';
 import {
   AccountTransactionDto,
   AccountTransactionsDto,
+  TotalTransactionsDto,
 } from './dto/accountTransactions.dto';
 
 @Injectable()
@@ -146,7 +147,7 @@ export class AccountsService {
     {
       id: '700004000000000000000003',
       type: 'Personal - Savings',
-      balance: 2300.75,
+      balance: 230078.75,
       currency: 'USD',
       usageType: 'Personal',
       accountType: 'Savings',
@@ -171,7 +172,7 @@ export class AccountsService {
           type: 'ACTUAL',
           dateTime: '2024-03-16T12:00:00Z',
           balanceAmount: {
-            amount: 2300.75,
+            amount: 230078.75,
             currency: 'USD',
           },
           creditLineIncluded: false,
@@ -182,7 +183,7 @@ export class AccountsService {
     {
       id: '700004000000000000000004',
       type: 'Business - Checking',
-      balance: 15000.45,
+      balance: 155670.45,
       currency: 'EUR',
       usageType: 'Business',
       accountType: 'Checking',
@@ -207,7 +208,7 @@ export class AccountsService {
           type: 'EXPECTED',
           dateTime: '2024-03-16T12:00:00Z',
           balanceAmount: {
-            amount: 15000.45,
+            amount: 155670.45,
             currency: 'EUR',
           },
           creditLineIncluded: false,
@@ -305,10 +306,10 @@ export class AccountsService {
       bookingDateTime: '2024-03-01T17:44:34.589Z',
       valueDateTime: '2024-03-01T17:44:34.589Z',
       status: TransactionStatusEnum.Booked,
-      amount: -50.23,
+      amount: -5045.23,
       currency: 'GBP',
       transactionAmount: {
-        amount: -50.23,
+        amount: -5045.23,
         currency: 'GBP',
       },
       reference: '0',
@@ -354,10 +355,10 @@ export class AccountsService {
       bookingDateTime: '2024-03-05T09:20:50.123Z',
       valueDateTime: '2024-03-05T09:20:50.123Z',
       status: TransactionStatusEnum.Booked,
-      amount: 35.6,
+      amount: -3578.6,
       currency: 'USD',
       transactionAmount: {
-        amount: 35.6,
+        amount: -3578.6,
         currency: 'USD',
       },
       reference: '123456',
@@ -400,10 +401,10 @@ export class AccountsService {
       bookingDateTime: '2024-03-10T14:37:01.789Z',
       valueDateTime: '2024-03-10T14:37:01.789Z',
       status: TransactionStatusEnum.Booked,
-      amount: -20.99,
+      amount: -2099.99,
       currency: 'EUR',
       transactionAmount: {
-        amount: -20.99,
+        amount: -2099.99,
         currency: 'EUR',
       },
       reference: '789012',
@@ -446,10 +447,10 @@ export class AccountsService {
       bookingDateTime: '2024-03-20T18:55:23.456Z',
       valueDateTime: '2024-03-20T18:55:23.456Z',
       status: TransactionStatusEnum.Booked,
-      amount: 40.35,
+      amount: 4057.35,
       currency: 'GBP',
       transactionAmount: {
-        amount: 40.35,
+        amount: 4057.35,
         currency: 'GBP',
       },
       reference: '567890',
@@ -555,8 +556,12 @@ export class AccountsService {
         new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
     );
 
-    return new AccountTransactionsDto({
+    return new TotalTransactionsDto({
       transactions: lastMonthOutgoingTransactions,
+      sum: lastMonthOutgoingTransactions.reduce(
+        (sum, transaction) => sum + transaction.amount,
+        0,
+      ),
     });
   }
 
@@ -583,8 +588,35 @@ export class AccountsService {
         new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
     );
 
-    return new AccountTransactionsDto({
+    return new TotalTransactionsDto({
       transactions: lastMonthIncomingTransactions,
+      sum: lastMonthIncomingTransactions.reduce(
+        (sum, transaction) => sum + transaction.amount,
+        0,
+      ),
     });
+  }
+
+  async getTotalRunwayInMonths(userId: string) {
+    const accountsAndBalances = await this.getAccountsAndBalances(userId);
+    const totalBalance = accountsAndBalances.accounts.reduce(
+      (sum, account) => sum + account.balance,
+      0,
+    );
+
+    const monthlyOutgoingTransactions =
+      await this.getMonthlyOutgoingTransactions(userId);
+    const monthlyIncomingTransactions =
+      await this.getMonthlyIncomingTransactions(userId);
+
+    const burn =
+      monthlyOutgoingTransactions.sum + monthlyIncomingTransactions.sum;
+
+    console.log(`Incoming: ${monthlyIncomingTransactions.sum}`);
+    console.log(`Outgoing: ${monthlyOutgoingTransactions.sum}`);
+    console.log(`Total Balance: ${totalBalance}`);
+    console.log(`Burn: ${burn}`);
+
+    return totalBalance / burn;
   }
 }

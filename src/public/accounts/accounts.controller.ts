@@ -59,4 +59,9 @@ export class AccountsController {
   async getMonthlyIncomingTransactions(): Promise<AccountTransactionsDto> {
     return this.accountsService.getMonthlyIncomingTransactions('demoUserId');
   }
+
+  @Post('getTotalRunwayInMonths')
+  async getTotalRunwayInMonths(): Promise<number> {
+    return this.accountsService.getTotalRunwayInMonths('demoUserId');
+  }
 }

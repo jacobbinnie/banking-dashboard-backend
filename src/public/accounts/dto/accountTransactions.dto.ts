@@ -107,3 +107,10 @@ export class AccountTransactionsDto extends Dto<AccountTransactionsDto> {
   @ApiProperty({ type: [AccountTransactionDto] })
   transactions: AccountTransactionDto[];
 }
+
+export class TotalTransactionsDto extends Dto<TotalTransactionsDto> {
+  @ApiProperty({ type: [AccountTransactionDto] })
+  transactions: AccountTransactionDto[];
+
+  sum: number;
+}
