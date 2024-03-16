@@ -27,6 +27,7 @@ export class AccountsService {
     applicationUserId: string,
     institutionId: string,
   ) {
+    console.log(applicationUserId, institutionId);
     // const resp = await axios.post(
     //   `https://api.yapily.com/account-auth-requests`,
     //   {
@@ -53,6 +54,7 @@ export class AccountsService {
   }
 
   async verifyConnect(userId: string, authCode: string, authState: string) {
+    console.log(userId, authCode, authState);
     try {
       // const resp = await fetch(`https://api.yapily.com/consent-auth-code`, {
       //   method: 'POST',
@@ -248,6 +250,7 @@ export class AccountsService {
   ];
 
   async getAccountsAndBalances(userId: string) {
+    console.log(userId);
     // const consentToken = await this.getConsentToken(userId);
     // const res: AccountApiListResponse = await axios(
     //   `https://api.yapily.com/accounts`,

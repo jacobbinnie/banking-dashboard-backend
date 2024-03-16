@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Dto } from 'src/lib/dto/Dto';
 import {
-  AccountBalance,
-  AccountIdentification,
   AccountName,
   AccountType,
   ConsolidatedAccountInformation,
