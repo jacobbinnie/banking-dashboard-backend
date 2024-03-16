@@ -6,4 +6,6 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('companies')
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
+
+  // Ideally use this controller for all top level account management of company assets
 }

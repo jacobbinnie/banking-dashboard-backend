@@ -6,4 +6,6 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  // Ideally use this controller for all user level account management & utility
 }
