@@ -23,6 +23,14 @@ export class TransactionBalanceDto extends Dto<TransactionBalanceDto> {
   currency?: string;
 }
 
+export class ProprietaryBankTransactionCodeDto extends Dto<ProprietaryBankTransactionCodeDto> {
+  @ApiProperty()
+  code?: string;
+
+  @ApiProperty()
+  issuer?: string;
+}
+
 export class AccountTransactionDto extends Dto<AccountTransactionDto> {
   @ApiProperty()
   id?: string;
@@ -78,8 +86,8 @@ export class AccountTransactionDto extends Dto<AccountTransactionDto> {
   @ApiProperty({ type: IsoBankTransactionCode })
   isoBankTransactionCode?: IsoBankTransactionCode;
 
-  @ApiProperty({ type: ProprietaryBankTransactionCode })
-  proprietaryBankTransactionCode?: ProprietaryBankTransactionCode;
+  @ApiProperty({ type: ProprietaryBankTransactionCodeDto })
+  proprietaryBankTransactionCode?: ProprietaryBankTransactionCodeDto;
 
   @ApiProperty({ type: TransactionBalanceDto })
   balance?: TransactionBalanceDto;

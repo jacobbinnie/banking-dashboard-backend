@@ -442,8 +442,8 @@ export class AccountsService {
         },
       },
       proprietaryBankTransactionCode: {
-        code: 'PMT',
-        issuer: 'modelo-sandbox',
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -488,8 +488,8 @@ export class AccountsService {
         },
       },
       proprietaryBankTransactionCode: {
-        code: 'CRS',
-        issuer: 'sandbox-bank',
+        code: 'CHASE',
+        issuer: 'jp-morgan-chase',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -534,8 +534,8 @@ export class AccountsService {
         },
       },
       proprietaryBankTransactionCode: {
-        code: 'SRV',
-        issuer: 'sandbox-bank',
+        code: 'UNI',
+        issuer: 'unicredit-bank',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -580,8 +580,8 @@ export class AccountsService {
         },
       },
       proprietaryBankTransactionCode: {
-        code: 'CRF',
-        issuer: 'sandbox-bank',
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
