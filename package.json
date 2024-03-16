@@ -32,7 +32,8 @@
     "openapi-typescript": "^6.7.5",
     "prisma": "^5.11.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

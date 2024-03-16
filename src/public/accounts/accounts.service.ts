@@ -1,13 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
 import { PrismaService } from 'prisma.service';
-import {
-  AccountApiListResponse,
-  AccountBalanceType,
-  AccountType,
-  UsageType,
-} from 'src/types';
 import { AccountApiListDto } from './dto/accountApiListResponse.dto';
+import { AccountBalanceType, AccountType, UsageType } from 'src/types/index';
 
 @Injectable()
 export class AccountsService {
@@ -155,7 +149,7 @@ export class AccountsService {
           {
             id: '700004000000000000000003',
             type: 'Business - Savings',
-            balance: 12000.0,
+            balance: 1287009.0,
             currency: 'USD',
             usageType: UsageType.Business,
             accountType: AccountType.Savings,
@@ -170,7 +164,7 @@ export class AccountsService {
                 type: AccountBalanceType.Authorised,
                 dateTime: new Date('2024-03-15T00:00:00.000Z'),
                 balanceAmount: {
-                  amount: 12000.0,
+                  amount: 1287009.0,
                   currency: 'USD',
                 },
                 creditLineIncluded: false,
@@ -181,7 +175,7 @@ export class AccountsService {
           {
             id: '700004000000000000000004',
             type: 'Personal - Checking',
-            balance: 500.0,
+            balance: 5430.0,
             currency: 'EUR',
             usageType: UsageType.Personal,
             accountType: AccountType.CashTrading,
@@ -196,7 +190,7 @@ export class AccountsService {
                 type: AccountBalanceType.Authorised,
                 dateTime: new Date('2024-03-15T00:00:00.000Z'),
                 balanceAmount: {
-                  amount: 500.0,
+                  amount: 5430.0,
                   currency: 'EUR',
                 },
                 creditLineIncluded: false,
