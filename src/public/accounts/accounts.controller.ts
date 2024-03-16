@@ -5,6 +5,7 @@ import { InitiateConnectDto } from './dto/initiateConnect.dto';
 import { VerifyConnectDto } from './dto/verifyConnect.dto';
 import { AccountsAndBalancesDto } from './dto/accountsAndBalances.dto';
 import { AccountTransactionsDto } from './dto/accountTransactions.dto';
+import { TotalRunwayDto } from './dto/totalRunway.dto';
 
 @ApiTags('accounts')
 @Controller('accounts')
@@ -61,7 +62,7 @@ export class AccountsController {
   }
 
   @Post('getTotalRunwayInMonths')
-  async getTotalRunwayInMonths(): Promise<number> {
+  async getTotalRunwayInMonths(): Promise<TotalRunwayDto> {
     return this.accountsService.getTotalRunwayInMonths('demoUserId');
   }
 }

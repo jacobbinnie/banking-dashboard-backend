@@ -11,6 +11,7 @@ import {
   AccountTransactionsDto,
   TotalTransactionsDto,
 } from './dto/accountTransactions.dto';
+import { TotalRunwayDto } from './dto/totalRunway.dto';
 
 @Injectable()
 export class AccountsService {
@@ -617,6 +618,12 @@ export class AccountsService {
     console.log(`Total Balance: ${totalBalance}`);
     console.log(`Burn: ${burn}`);
 
-    return totalBalance / burn;
+    return new TotalRunwayDto({
+      totalRunway: totalBalance / burn,
+      monthlyBurn: burn,
+      monthlyIncoming: monthlyIncomingTransactions.sum,
+      monthlyOutgoing: monthlyOutgoingTransactions.sum,
+      currentBalance: totalBalance,
+    });
   }
 }
