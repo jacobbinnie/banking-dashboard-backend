@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 import { PrismaService } from 'prisma.service';
-import YapilyApi from '../../types/dist';
+import {
+  AccountApiListResponse,
+  AccountBalanceType,
+  AccountType,
+  UsageType,
+} from 'src/types';
+import { AccountApiListDto } from './dto/accountApiListResponse.dto';
 
 @Injectable()
 export class AccountsService {
@@ -96,19 +103,109 @@ export class AccountsService {
   }
 
   async getAccountsAndBalances(userId: string) {
-    const consentToken = await this.getConsentToken(userId);
+    // const consentToken = await this.getConsentToken(userId);
+    // const res: AccountApiListResponse = await axios(
+    //   `https://api.yapily.com/accounts`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       consent: consentToken,
+    //       'psu-id': 'string',
+    //       'psu-corporate-id': 'string',
+    //       'psu-ip-address': 'string',
+    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
+    //     },
+    //   },
+    // );
 
-    const resp = await fetch(`https://api.yapily.com/accounts`, {
-      method: 'GET',
-      headers: {
-        consent: consentToken,
-        'psu-id': 'string',
-        'psu-corporate-id': 'string',
-        'psu-ip-address': 'string',
-        Authorization: 'Basic ' + btoa('<username>:<password>'),
+    // Mocked + Typesafe Data From Yapily
+    return new AccountApiListDto({
+      data: {
+        meta: {
+          tracingId: '1139346006be4345a94fd8b3728844e3',
+          count: 1,
+        },
+        data: [
+          {
+            id: '700004000000000000000002',
+            type: 'Personal - Current',
+            balance: -12.57,
+            currency: 'GBP',
+            usageType: UsageType.Personal,
+            accountType: AccountType.Charges,
+            nickname: 'xxxx0006',
+            accountNames: [
+              {
+                name: 'Mr. John Smith & Mrs. Susan Smith',
+              },
+            ],
+            accountBalances: [
+              {
+                type: AccountBalanceType.Authorised,
+                dateTime: new Date('2024-03-15T00:00:00.000Z'),
+                balanceAmount: {
+                  amount: -12.57,
+                  currency: 'GBP',
+                },
+                creditLineIncluded: false,
+                creditLines: [],
+              },
+            ],
+          },
+          {
+            id: '700004000000000000000003',
+            type: 'Business - Savings',
+            balance: 12000.0,
+            currency: 'USD',
+            usageType: UsageType.Business,
+            accountType: AccountType.Savings,
+            nickname: 'Business Savings',
+            accountNames: [
+              {
+                name: 'ABC Corporation',
+              },
+            ],
+            accountBalances: [
+              {
+                type: AccountBalanceType.Authorised,
+                dateTime: new Date('2024-03-15T00:00:00.000Z'),
+                balanceAmount: {
+                  amount: 12000.0,
+                  currency: 'USD',
+                },
+                creditLineIncluded: false,
+                creditLines: [],
+              },
+            ],
+          },
+          {
+            id: '700004000000000000000004',
+            type: 'Personal - Checking',
+            balance: 500.0,
+            currency: 'EUR',
+            usageType: UsageType.Personal,
+            accountType: AccountType.CashTrading,
+            nickname: 'Personal Checking',
+            accountNames: [
+              {
+                name: 'Jane Doe',
+              },
+            ],
+            accountBalances: [
+              {
+                type: AccountBalanceType.Authorised,
+                dateTime: new Date('2024-03-15T00:00:00.000Z'),
+                balanceAmount: {
+                  amount: 500.0,
+                  currency: 'EUR',
+                },
+                creditLineIncluded: false,
+                creditLines: [],
+              },
+            ],
+          },
+        ],
       },
     });
-
-    const data = await resp.text();
   }
 }
