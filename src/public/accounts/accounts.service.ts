@@ -4,6 +4,7 @@ import {
   AccountAndBalanceDto,
   AccountBalanceDto,
   AccountsAndBalancesDto,
+  InstitutionDto,
 } from './dto/accountsAndBalances.dto';
 import { AccountType, TransactionStatusEnum, UsageType } from 'src/types/index';
 import {
@@ -12,6 +13,7 @@ import {
   TotalTransactionsDto,
 } from './dto/accountTransactions.dto';
 import { TotalRunwayDto } from './dto/totalRunway.dto';
+import { CredentialsType } from 'src/types/index';
 
 @Injectable()
 export class AccountsService {
@@ -112,7 +114,7 @@ export class AccountsService {
     {
       id: '700004000000000000000002',
       type: 'Personal - Current',
-      balance: -12.57,
+      balance: 18942.57,
       currency: 'GBP',
       usageType: 'Personal',
       accountType: 'CashPayment',
@@ -137,13 +139,42 @@ export class AccountsService {
           type: 'EXPECTED',
           dateTime: '2021-06-09T08:51:02.463Z',
           balanceAmount: {
-            amount: -12.57,
+            amount: -18942.57,
             currency: 'GBP',
           },
           creditLineIncluded: false,
           creditLines: [],
         },
       ],
+      institution: {
+        id: 'test',
+        countries: [
+          {
+            displayName: 'United Kingdom',
+            countryCode2: 'GB',
+          },
+        ],
+        credentialsType: CredentialsType.OpenBankingUkAuto,
+        environmentType: 'SANDBOX',
+        features: ['ACCOUNT_BALANCES'],
+        fullName: 'USBC Bank',
+        media: [
+          {
+            source:
+              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+            type: 'icon',
+          },
+          {
+            source:
+              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
+            type: 'logo',
+          },
+        ],
+        name: 'USBC Bank',
+        monitoring: {
+          status: 'ACTIVE',
+        },
+      },
     },
     {
       id: '700004000000000000000003',
@@ -180,6 +211,35 @@ export class AccountsService {
           creditLines: [],
         },
       ],
+      institution: {
+        id: 'test',
+        countries: [
+          {
+            displayName: 'United Kingdom',
+            countryCode2: 'GB',
+          },
+        ],
+        credentialsType: CredentialsType.OpenBankingUkAuto,
+        environmentType: 'SANDBOX',
+        features: ['ACCOUNT_BALANCES'],
+        fullName: 'JP Morgan Chase',
+        media: [
+          {
+            source:
+              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+            type: 'icon',
+          },
+          {
+            source:
+              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
+            type: 'logo',
+          },
+        ],
+        name: 'JP Morgan Chase',
+        monitoring: {
+          status: 'ACTIVE',
+        },
+      },
     },
     {
       id: '700004000000000000000004',
@@ -216,6 +276,35 @@ export class AccountsService {
           creditLines: [],
         },
       ],
+      institution: {
+        id: 'test',
+        countries: [
+          {
+            displayName: 'United Kingdom',
+            countryCode2: 'GB',
+          },
+        ],
+        credentialsType: CredentialsType.OpenBankingUkAuto,
+        environmentType: 'SANDBOX',
+        features: ['ACCOUNT_BALANCES'],
+        fullName: 'UniCredit Bank',
+        media: [
+          {
+            source:
+              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+            type: 'icon',
+          },
+          {
+            source:
+              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
+            type: 'logo',
+          },
+        ],
+        name: 'UniCredit Bank',
+        monitoring: {
+          status: 'ACTIVE',
+        },
+      },
     },
     {
       id: '700004000000000000000005',
@@ -252,6 +341,35 @@ export class AccountsService {
           creditLines: [],
         },
       ],
+      institution: {
+        id: 'test',
+        countries: [
+          {
+            displayName: 'United Kingdom',
+            countryCode2: 'GB',
+          },
+        ],
+        credentialsType: CredentialsType.OpenBankingUkAuto,
+        environmentType: 'SANDBOX',
+        features: ['ACCOUNT_BALANCES'],
+        fullName: 'Royal Bank of Canada (RBC)',
+        media: [
+          {
+            source:
+              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+            type: 'icon',
+          },
+          {
+            source:
+              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
+            type: 'logo',
+          },
+        ],
+        name: 'Royal Bank of Canada (RBC)',
+        monitoring: {
+          status: 'ACTIVE',
+        },
+      },
     },
   ];
 
@@ -293,6 +411,19 @@ export class AccountsService {
               creditLines: balance.creditLines,
             });
           }),
+          institution: account.institution
+            ? new InstitutionDto({
+                id: account.institution.id,
+                countries: account.institution.countries,
+                credentialsType: account.institution.credentialsType,
+                environmentType: account.institution.environmentType,
+                features: account.institution.features,
+                fullName: account.institution.fullName,
+                media: account.institution.media,
+                name: account.institution.name,
+                monitoring: account.institution.monitoring,
+              })
+            : null,
           description: account.type,
           details: account.type,
         });

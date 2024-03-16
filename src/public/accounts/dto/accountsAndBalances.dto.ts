@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import { Dto } from 'src/lib/dto/Dto';
+import { Institution } from 'src/types/dist';
 import {
   AccountName,
   AccountType,
@@ -16,6 +18,55 @@ export class CreditLineDto extends Dto<CreditLineDto> {
 
   @ApiProperty()
   currency?: string;
+}
+
+export class CountriesDto extends Dto<CountriesDto> {
+  @ApiProperty()
+  @IsString()
+  displayName: string;
+
+  @ApiProperty()
+  @IsString()
+  countryCode2: string;
+}
+
+export class MediaDto extends Dto<MediaDto> {
+  @ApiProperty()
+  @IsString()
+  source: string;
+
+  @ApiProperty()
+  @IsString()
+  type: string;
+}
+
+export class InstitutionDto extends Dto<InstitutionDto> {
+  @ApiProperty()
+  id?: string;
+
+  @ApiProperty()
+  name?: string;
+
+  @ApiProperty()
+  fullName?: string;
+
+  @ApiProperty()
+  environmentType?: string;
+
+  @ApiProperty()
+  credentialsType?: string;
+
+  @ApiProperty({ type: CountriesDto, isArray: true })
+  countries?: CountriesDto[];
+
+  @ApiProperty({ type: MediaDto, isArray: true })
+  media?: MediaDto[];
+
+  @ApiProperty()
+  features?: string[];
+
+  @ApiProperty()
+  monitoring?: { [key: string]: string };
 }
 
 export class BalanceAmountDto extends Dto<BalanceAmountDto> {
@@ -94,6 +145,9 @@ export class AccountAndBalanceDto extends Dto<AccountAndBalanceDto> {
 
   @ApiProperty()
   consolidatedAccountInformation?: ConsolidatedAccountInformation;
+
+  @ApiProperty({ type: InstitutionDto })
+  institution: InstitutionDto;
 }
 
 export class AccountsAndBalancesDto extends Dto<AccountsAndBalancesDto> {
