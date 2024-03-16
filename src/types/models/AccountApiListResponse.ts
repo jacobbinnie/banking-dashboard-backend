@@ -18,65 +18,69 @@ import { ResponseListMeta } from '../models/ResponseListMeta';
 import { HttpFile } from '../http/http';
 
 export class AccountApiListResponse {
-    'meta'?: ResponseListMeta;
-    'data'?: Array<Account>;
-    'links'?: { [key: string]: string; };
-    'forwardedData'?: Array<ResponseForwardedData>;
-    'raw'?: Array<RawResponse>;
-    'paging'?: FilteredClientPayloadListAccount;
-    'tracingId'?: string;
+  'meta'?: ResponseListMeta;
+  'data'?: Array<Account>;
+  'links'?: { [key: string]: string };
+  'forwardedData'?: Array<ResponseForwardedData>;
+  'raw'?: Array<RawResponse>;
+  'paging'?: FilteredClientPayloadListAccount;
+  'tracingId'?: string;
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "meta",
-            "baseName": "meta",
-            "type": "ResponseListMeta",
-            "format": ""
-        },
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<Account>",
-            "format": ""
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "forwardedData",
-            "baseName": "forwardedData",
-            "type": "Array<ResponseForwardedData>",
-            "format": ""
-        },
-        {
-            "name": "raw",
-            "baseName": "raw",
-            "type": "Array<RawResponse>",
-            "format": ""
-        },
-        {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "FilteredClientPayloadListAccount",
-            "format": ""
-        },
-        {
-            "name": "tracingId",
-            "baseName": "tracingId",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+    format: string;
+  }> = [
+    {
+      name: 'meta',
+      baseName: 'meta',
+      type: 'ResponseListMeta',
+      format: '',
+    },
+    {
+      name: 'data',
+      baseName: 'data',
+      type: 'Array<Account>',
+      format: '',
+    },
+    {
+      name: 'links',
+      baseName: 'links',
+      type: '{ [key: string]: string; }',
+      format: '',
+    },
+    {
+      name: 'forwardedData',
+      baseName: 'forwardedData',
+      type: 'Array<ResponseForwardedData>',
+      format: '',
+    },
+    {
+      name: 'raw',
+      baseName: 'raw',
+      type: 'Array<RawResponse>',
+      format: '',
+    },
+    {
+      name: 'paging',
+      baseName: 'paging',
+      type: 'FilteredClientPayloadListAccount',
+      format: '',
+    },
+    {
+      name: 'tracingId',
+      baseName: 'tracingId',
+      type: 'string',
+      format: '',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AccountApiListResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AccountApiListResponse.attributeTypeMap;
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

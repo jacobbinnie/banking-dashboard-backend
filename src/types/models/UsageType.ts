@@ -13,11 +13,11 @@
 import { HttpFile } from '../http/http';
 
 /**
-* The customer segment of the account.
-*/
+ * The customer segment of the account.
+ */
 export enum UsageType {
-    Personal = 'PERSONAL',
-    Business = 'BUSINESS',
-    Other = 'OTHER',
-    Unknown = 'UNKNOWN'
+  Personal = 'PERSONAL',
+  Business = 'BUSINESS',
+  Other = 'OTHER',
+  Unknown = 'UNKNOWN',
 }

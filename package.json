@@ -29,6 +29,7 @@
     "@prisma/client": "5.11.0",
     "axios": "^1.6.8",
     "class-validator": "^0.14.1",
+    "morphism": "^1.12.3",
     "openapi-typescript": "^6.7.5",
     "prisma": "^5.11.0",
     "reflect-metadata": "^0.1.13",

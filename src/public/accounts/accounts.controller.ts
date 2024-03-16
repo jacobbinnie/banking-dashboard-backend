@@ -3,7 +3,7 @@ import { AccountsService } from './accounts.service';
 import { ApiTags } from '@nestjs/swagger';
 import { InitiateConnectDto } from './dto/initiateConnect.dto';
 import { VerifyConnectDto } from './dto/verifyConnect.dto';
-import { AccountApiListDto } from './dto/accountApiListResponse.dto';
+import { AccountsAndBalancesDto } from './dto/accountsAndBalances.dto';
 
 @ApiTags('accounts')
 @Controller('accounts')
@@ -37,7 +37,7 @@ export class AccountsController {
   }
 
   @Post('getAccountsAndBalances')
-  async getAccountsAndBalances(): Promise<AccountApiListDto> {
+  async getAccountsAndBalances(): Promise<AccountsAndBalancesDto> {
     return this.accountsService.getAccountsAndBalances('demoUserId');
   }
 }

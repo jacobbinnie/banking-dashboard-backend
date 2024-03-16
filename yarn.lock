@@ -3879,6 +3879,11 @@ mkdirp@^0.5.4:
   dependencies:
     minimist "^1.2.6"
 
+morphism@^1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/morphism/-/morphism-1.12.3.tgz#a1adaeb4e93995c599d45c2298f5d233ec6c7e5f"
+  integrity sha512-HeHng5VdrgggdkpQEh/9poNwZ7MfoC0HtvuJJF+4NQB8hPqmfazOUpftggMJ3M9rKZeAJhDtTackhkZvjKi9EA==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"

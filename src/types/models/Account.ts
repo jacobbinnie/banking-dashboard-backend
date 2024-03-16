@@ -19,130 +19,132 @@ import { UsageType } from '../models/UsageType';
 import { HttpFile } from '../http/http';
 
 export class Account {
-    /**
-    * Unique identifier of the account.
-    */
-    'id'?: string;
-    /**
-    * Specifies the type of account e.g. (BUSINESS_CURRENT).
-    */
-    'type'?: string;
-    /**
-    * Product name as defined by the financial institution for this account
-    */
-    'description'?: string;
-    /**
-    * Main / headline balance for the account. <br><br> Use of this field is recommended as fallback only. Instead, use of the typed balances (accountBalances) is recommended.
-    */
-    'balance'?: number;
-    /**
-    * Currency the bank account balance is denoted in. <br><br> Specified as a 3-letter ISO 4217 currency code
-    */
-    'currency'?: string;
-    'usageType'?: UsageType;
-    'accountType'?: AccountType;
-    /**
-    * Nickname of the account that was provided by the account owner. <br><br> May be used to aid identification of the account.
-    */
-    'nickname'?: string;
-    /**
-    * Supplementary specifications that might be provided by the Bank. These provide further characteristics about the account.
-    */
-    'details'?: string;
-    'accountNames'?: Array<AccountName>;
-    'accountIdentifications'?: Set<AccountIdentification>;
-    'accountBalances'?: Array<AccountBalance>;
-    'consolidatedAccountInformation'?: ConsolidatedAccountInformation;
+  /**
+   * Unique identifier of the account.
+   */
+  'id'?: string;
+  /**
+   * Specifies the type of account e.g. (BUSINESS_CURRENT).
+   */
+  'type'?: string;
+  /**
+   * Product name as defined by the financial institution for this account
+   */
+  'description'?: string;
+  /**
+   * Main / headline balance for the account. <br><br> Use of this field is recommended as fallback only. Instead, use of the typed balances (accountBalances) is recommended.
+   */
+  'balance'?: number;
+  /**
+   * Currency the bank account balance is denoted in. <br><br> Specified as a 3-letter ISO 4217 currency code
+   */
+  'currency'?: string;
+  'usageType'?: UsageType;
+  'accountType'?: AccountType;
+  /**
+   * Nickname of the account that was provided by the account owner. <br><br> May be used to aid identification of the account.
+   */
+  'nickname'?: string;
+  /**
+   * Supplementary specifications that might be provided by the Bank. These provide further characteristics about the account.
+   */
+  'details'?: string;
+  'accountNames'?: Array<AccountName>;
+  'accountIdentifications'?: Set<AccountIdentification>;
+  'accountBalances'?: Array<AccountBalance>;
+  'consolidatedAccountInformation'?: ConsolidatedAccountInformation;
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "balance",
-            "baseName": "balance",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "currency",
-            "baseName": "currency",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "usageType",
-            "baseName": "usageType",
-            "type": "UsageType",
-            "format": ""
-        },
-        {
-            "name": "accountType",
-            "baseName": "accountType",
-            "type": "AccountType",
-            "format": ""
-        },
-        {
-            "name": "nickname",
-            "baseName": "nickname",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "details",
-            "baseName": "details",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "accountNames",
-            "baseName": "accountNames",
-            "type": "Array<AccountName>",
-            "format": ""
-        },
-        {
-            "name": "accountIdentifications",
-            "baseName": "accountIdentifications",
-            "type": "Set<AccountIdentification>",
-            "format": ""
-        },
-        {
-            "name": "accountBalances",
-            "baseName": "accountBalances",
-            "type": "Array<AccountBalance>",
-            "format": ""
-        },
-        {
-            "name": "consolidatedAccountInformation",
-            "baseName": "consolidatedAccountInformation",
-            "type": "ConsolidatedAccountInformation",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+    format: string;
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'description',
+      baseName: 'description',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'balance',
+      baseName: 'balance',
+      type: 'number',
+      format: '',
+    },
+    {
+      name: 'currency',
+      baseName: 'currency',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'usageType',
+      baseName: 'usageType',
+      type: 'UsageType',
+      format: '',
+    },
+    {
+      name: 'accountType',
+      baseName: 'accountType',
+      type: 'AccountType',
+      format: '',
+    },
+    {
+      name: 'nickname',
+      baseName: 'nickname',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'details',
+      baseName: 'details',
+      type: 'string',
+      format: '',
+    },
+    {
+      name: 'accountNames',
+      baseName: 'accountNames',
+      type: 'Array<AccountName>',
+      format: '',
+    },
+    {
+      name: 'accountIdentifications',
+      baseName: 'accountIdentifications',
+      type: 'Set<AccountIdentification>',
+      format: '',
+    },
+    {
+      name: 'accountBalances',
+      baseName: 'accountBalances',
+      type: 'Array<AccountBalance>',
+      format: '',
+    },
+    {
+      name: 'consolidatedAccountInformation',
+      baseName: 'consolidatedAccountInformation',
+      type: 'ConsolidatedAccountInformation',
+      format: '',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Account.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Account.attributeTypeMap;
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-
-
-

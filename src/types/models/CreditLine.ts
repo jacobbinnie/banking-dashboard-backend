@@ -15,35 +15,37 @@ import { CreditLineType } from '../models/CreditLineType';
 import { HttpFile } from '../http/http';
 
 /**
-* __Mandatory__. Details whether the account has access to a credit line from an `Institution`.
-*/
+ * __Mandatory__. Details whether the account has access to a credit line from an `Institution`.
+ */
 export class CreditLine {
-    'type'?: CreditLineType;
-    'creditLineAmount'?: Amount;
+  'type'?: CreditLineType;
+  'creditLineAmount'?: Amount;
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "CreditLineType",
-            "format": ""
-        },
-        {
-            "name": "creditLineAmount",
-            "baseName": "creditLineAmount",
-            "type": "Amount",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+    format: string;
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'CreditLineType',
+      format: '',
+    },
+    {
+      name: 'creditLineAmount',
+      baseName: 'creditLineAmount',
+      type: 'Amount',
+      format: '',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreditLine.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreditLine.attributeTypeMap;
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-
-
-

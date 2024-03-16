@@ -16,62 +16,64 @@ import { CreditLine } from '../models/CreditLine';
 import { HttpFile } from '../http/http';
 
 export class AccountBalance {
-    'type'?: AccountBalanceType;
-    /**
-    * Date and time of the reported balance.
-    */
-    'dateTime'?: Date;
-    'balanceAmount'?: Amount;
-    /**
-    * _Optional_. Indicates whether any credit lines are included in the balance.
-    */
-    'creditLineIncluded'?: boolean;
-    /**
-    * _Optional_. Specifies the type of balance.
-    */
-    'creditLines'?: Array<CreditLine>;
+  'type'?: AccountBalanceType;
+  /**
+   * Date and time of the reported balance.
+   */
+  'dateTime'?: Date;
+  'balanceAmount'?: Amount;
+  /**
+   * _Optional_. Indicates whether any credit lines are included in the balance.
+   */
+  'creditLineIncluded'?: boolean;
+  /**
+   * _Optional_. Specifies the type of balance.
+   */
+  'creditLines'?: Array<CreditLine>;
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "AccountBalanceType",
-            "format": ""
-        },
-        {
-            "name": "dateTime",
-            "baseName": "dateTime",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "balanceAmount",
-            "baseName": "balanceAmount",
-            "type": "Amount",
-            "format": ""
-        },
-        {
-            "name": "creditLineIncluded",
-            "baseName": "creditLineIncluded",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "creditLines",
-            "baseName": "creditLines",
-            "type": "Array<CreditLine>",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+    format: string;
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'AccountBalanceType',
+      format: '',
+    },
+    {
+      name: 'dateTime',
+      baseName: 'dateTime',
+      type: 'Date',
+      format: 'date-time',
+    },
+    {
+      name: 'balanceAmount',
+      baseName: 'balanceAmount',
+      type: 'Amount',
+      format: '',
+    },
+    {
+      name: 'creditLineIncluded',
+      baseName: 'creditLineIncluded',
+      type: 'boolean',
+      format: '',
+    },
+    {
+      name: 'creditLines',
+      baseName: 'creditLines',
+      type: 'Array<CreditLine>',
+      format: '',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AccountBalance.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AccountBalance.attributeTypeMap;
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-
-
-
