@@ -157,20 +157,15 @@ export class AccountsService {
         credentialsType: CredentialsType.OpenBankingUkAuto,
         environmentType: 'SANDBOX',
         features: ['ACCOUNT_BALANCES'],
-        fullName: 'USBC Bank',
+        fullName: 'HSBC Bank',
         media: [
           {
             source:
-              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+              'https://icons.veryicon.com/png/o/business/bank-logo-2/bank-hsbc.png',
             type: 'icon',
           },
-          {
-            source:
-              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
-            type: 'logo',
-          },
         ],
-        name: 'USBC Bank',
+        name: 'HSBC Bank',
         monitoring: {
           status: 'ACTIVE',
         },
@@ -226,13 +221,8 @@ export class AccountsService {
         media: [
           {
             source:
-              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+              'https://preview.redd.it/y4idcrhfuex31.png?auto=webp&s=36032baecf00ce42c6d15a4dcbfb153e99557724',
             type: 'icon',
-          },
-          {
-            source:
-              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
-            type: 'logo',
           },
         ],
         name: 'JP Morgan Chase',
@@ -291,13 +281,8 @@ export class AccountsService {
         media: [
           {
             source:
-              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+              'https://play-lh.googleusercontent.com/SXA4Ucqu1tW6Xau53IIok3GheOGljo-mK57FuK8GGorjWWa2g2oQhvFsTfs9AdJ5mh4=w240-h480-rw',
             type: 'icon',
-          },
-          {
-            source:
-              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
-            type: 'logo',
           },
         ],
         name: 'UniCredit Bank',
@@ -356,13 +341,8 @@ export class AccountsService {
         media: [
           {
             source:
-              'https://images.yapily.com/image/ce2bfdbf-1ae2-4919-ab7b-e8b3d5e93b36?size=0',
+              'https://play-lh.googleusercontent.com/S69aU872MaEBhaId0TWtX3hlAE8chVIPeH7eR7KLyMprT-0y2hJiLWa8W8o7i6V6OWYe',
             type: 'icon',
-          },
-          {
-            source:
-              'https://images.yapily.com/image/ca502f24-d6df-4785-b4b8-1034b100af77?size=0',
-            type: 'logo',
           },
         ],
         name: 'Royal Bank of Canada (RBC)',
@@ -750,7 +730,7 @@ export class AccountsService {
     console.log(`Burn: ${burn}`);
 
     return new TotalRunwayDto({
-      totalRunway: totalBalance / burn,
+      totalRunway: (totalBalance / burn) * -1,
       monthlyBurn: burn,
       monthlyIncoming: monthlyIncomingTransactions.sum,
       monthlyOutgoing: monthlyOutgoingTransactions.sum,
