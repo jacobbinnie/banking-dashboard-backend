@@ -5,7 +5,11 @@ import {
   AccountBalanceDto,
   AccountsAndBalancesDto,
 } from './dto/accountsAndBalances.dto';
-import { AccountType, UsageType } from 'src/types/index';
+import { AccountType, TransactionStatusEnum, UsageType } from 'src/types/index';
+import {
+  AccountTransactionDto,
+  AccountTransactionsDto,
+} from './dto/accountTransactions.dto';
 
 @Injectable()
 export class AccountsService {
@@ -289,6 +293,240 @@ export class AccountsService {
           }),
           description: account.type,
           details: account.type,
+        });
+      }),
+    });
+  }
+
+  demoAccountTransactions = [
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2021-05-06T17:44:34.589Z',
+      bookingDateTime: '2021-05-06T17:44:34.589Z',
+      valueDateTime: '2021-05-06T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -100.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -100.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description:
+        'Debit for Payment Id: sdp-1-57379a43-c4b8-49f5-bd7c-699189ee7a60',
+      transactionInformation: [
+        'Debit for Payment Id: sdp-1-57379a43-c4b8-49f5-bd7c-699189ee7a60',
+      ],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'PMT',
+        issuer: 'modelo-sandbox',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 426.53,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: 'e3f532f9-41d4-45c7-8be3-6829320d9d25',
+      date: '2021-07-12T09:20:50.123Z',
+      bookingDateTime: '2021-07-12T09:20:50.123Z',
+      valueDateTime: '2021-07-12T09:20:50.123Z',
+      status: TransactionStatusEnum.Booked,
+      amount: 75.6,
+      currency: 'USD',
+      transactionAmount: {
+        amount: 75.6,
+        currency: 'USD',
+      },
+      reference: '123456',
+      description: 'Credit for Sale',
+      transactionInformation: ['Credit for Sale'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'SALE',
+          name: 'Sales',
+        },
+        familyCode: {
+          code: 'CRDT',
+          name: 'Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'ONLN',
+          name: 'Online Sale',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'CRS',
+        issuer: 'sandbox-bank',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 900.25,
+          currency: 'USD',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'b7a32fc0155fbc2386bc36ed16809d3a',
+        },
+      },
+    },
+    {
+      id: '03e9f86b-f3f8-4f3a-8d45-9ff3f7d6c8a2',
+      date: '2021-08-25T14:37:01.789Z',
+      bookingDateTime: '2021-08-25T14:37:01.789Z',
+      valueDateTime: '2021-08-25T14:37:01.789Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -45.99,
+      currency: 'EUR',
+      transactionAmount: {
+        amount: -45.99,
+        currency: 'EUR',
+      },
+      reference: '789012',
+      description: 'Debit for Service Charge',
+      transactionInformation: ['Debit for Service Charge'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'SRVC',
+          name: 'Service',
+        },
+        familyCode: {
+          code: 'DBIT',
+          name: 'Debit Transfers',
+        },
+        subFamilyCode: {
+          code: 'CHRG',
+          name: 'Charge',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'SRV',
+        issuer: 'sandbox-bank',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 350.76,
+          currency: 'EUR',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: '9a7c83ecda68e6b4f9163f1f3e1c4378',
+        },
+      },
+    },
+    {
+      id: '1c5e9c7a-e8d7-4c7b-b7ac-6f26e7c0fc2a',
+      date: '2021-10-17T18:55:23.456Z',
+      bookingDateTime: '2021-10-17T18:55:23.456Z',
+      valueDateTime: '2021-10-17T18:55:23.456Z',
+      status: TransactionStatusEnum.Booked,
+      amount: 120.35,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: 120.35,
+        currency: 'GBP',
+      },
+      reference: '567890',
+      description: 'Credit for Refund',
+      transactionInformation: ['Credit for Refund'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'RFND',
+          name: 'Refund',
+        },
+        familyCode: {
+          code: 'CRDT',
+          name: 'Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'RTRN',
+          name: 'Return',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'CRF',
+        issuer: 'sandbox-bank',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 350.76,
+          currency: 'EUR',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: '9a7c83ecda68e6b4f9163f1f3e1c4378',
+        },
+      },
+    },
+  ];
+
+  async getAccountTransactions(userId: string, accountId: string) {
+    console.log(userId, accountId);
+    // const consentToken = await this.getConsentToken(userId);
+    // const resp = await fetch(
+    //   `https://api.yapily.com/accounts/${accountId}/transactions`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       consent: consentId,
+    //       'psu-id': 'string',
+    //       'psu-corporate-id': 'string',
+    //       'psu-ip-address': 'string',
+    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
+    //     },
+    //   },
+    // );
+
+    return new AccountTransactionsDto({
+      transactions: this.demoAccountTransactions.map((transaction) => {
+        return new AccountTransactionDto({
+          id: transaction.id,
+          date: new Date(transaction.date),
+          bookingDateTime: new Date(transaction.bookingDateTime),
+          valueDateTime: new Date(transaction.valueDateTime),
+          status: transaction.status,
+          amount: transaction.amount,
+          currency: transaction.currency,
+          transactionAmount: transaction.transactionAmount,
+          reference: transaction.reference,
+          description: transaction.description,
+          transactionInformation: transaction.transactionInformation,
+          isoBankTransactionCode: transaction.isoBankTransactionCode,
+          proprietaryBankTransactionCode:
+            transaction.proprietaryBankTransactionCode,
+          balance: {
+            amount: transaction.balance.balanceAmount.amount,
+            currency: transaction.balance.balanceAmount.currency,
+          },
+          enrichment: transaction.enrichment,
         });
       }),
     });
