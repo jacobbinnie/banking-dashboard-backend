@@ -12,7 +12,7 @@ import { TotalRunwayDto } from './dto/totalRunway.dto';
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
-  // I would always have some sort of bearer guards to ensure only authenticated users are accessing these endpoints
+  // I would always have some sort of bearer guard in a real world case.
   // @ApiBearerAuth()
   // @UseGuards(JwtAuthGuard)
   @Post('initiateConnectAccount')
@@ -69,4 +69,16 @@ export class AccountsController {
   async getTotalRunwayInMonths(): Promise<TotalRunwayDto> {
     return this.accountsService.getTotalRunwayInMonths('demoUserId');
   }
+
+  @Post('generateAccountReports')
+  async generateAccountReports(
+    @Body() { accountId }: { accountId: 'string' },
+  ): Promise<{
+    [key: string]: string;
+  }> {
+    return this.accountsService.getReportsForAccount('demoUserId', accountId);
+  }
+
+  // Could connect the above up to a cron job to run every month and store the data in a database.
+  // After generating the reports for an account, you could automatically send out via email to any customers who would be interested
 }

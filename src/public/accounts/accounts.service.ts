@@ -6,7 +6,12 @@ import {
   AccountsAndBalancesDto,
   InstitutionDto,
 } from './dto/accountsAndBalances.dto';
-import { AccountType, TransactionStatusEnum, UsageType } from 'src/types/index';
+import {
+  AccountType,
+  ApiResponseOfAccountStatement,
+  TransactionStatusEnum,
+  UsageType,
+} from 'src/types/index';
 import {
   AccountTransactionDto,
   AccountTransactionsDto,
@@ -14,11 +19,13 @@ import {
 } from './dto/accountTransactions.dto';
 import { TotalRunwayDto } from './dto/totalRunway.dto';
 import { CredentialsType } from 'src/types/index';
+import axios from 'axios';
 
 @Injectable()
 export class AccountsService {
   constructor(private readonly prisma: PrismaService) {}
 
+  // Would be a handy function to have in a real world scenario
   private async getConsentToken(userId: string) {
     const consent = await this.prisma.consents.findFirst({
       where: {
@@ -97,7 +104,7 @@ export class AccountsService {
         });
       }
 
-      // TODO: not the most secure way to store consents. However, could use one way hashing to store the consent token in the database.
+      // Not the most secure way to store consents for demo purposes. However, could use one way hashing in prod as a solution.
       await this.prisma.consents.create({
         data: {
           expiry: new Date(new Date().getTime() + 89 * 24 * 60 * 60 * 1000),
@@ -108,6 +115,244 @@ export class AccountsService {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  async getAccountsAndBalances(userId: string) {
+    console.log(userId);
+    // const consentToken = await this.getConsentToken(userId);
+    // const res: AccountApiListResponse = await axios(
+    //   `https://api.yapily.com/accounts`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       consent: consentToken,
+    //       'psu-id': 'string',
+    //       'psu-corporate-id': 'string',
+    //       'psu-ip-address': 'string',
+    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
+    //     },
+    //   },
+    // );
+
+    // Mocked + Typesafe Data From Yapily
+    return new AccountsAndBalancesDto({
+      accounts: this.demoAccountsAndBalances.map((account) => {
+        return new AccountAndBalanceDto({
+          id: account.id,
+          type: account.type,
+          balance: account.balance,
+          currency: account.currency,
+          usageType: UsageType.Personal,
+          accountType: AccountType.CashTrading,
+          nickname: account.nickname,
+          accountNames: account.accountNames,
+          accountIdentifications: account.accountIdentifications,
+          accountBalances: account.accountBalances.map((balance) => {
+            return new AccountBalanceDto({
+              dateTime: new Date(balance.dateTime),
+              balanceAmount: balance.balanceAmount,
+              creditLineIncluded: balance.creditLineIncluded,
+              creditLines: balance.creditLines,
+            });
+          }),
+          institution: account.institution
+            ? new InstitutionDto({
+                id: account.institution.id,
+                countries: account.institution.countries,
+                credentialsType: account.institution.credentialsType,
+                environmentType: account.institution.environmentType,
+                features: account.institution.features,
+                fullName: account.institution.fullName,
+                media: account.institution.media,
+                name: account.institution.name,
+                monitoring: account.institution.monitoring,
+              })
+            : null,
+          description: account.type,
+          details: account.type,
+        });
+      }),
+    });
+  }
+
+  async getAccountTransactions(userId: string, accountId: string) {
+    const transactions = this.demoAccountTransactions.filter(
+      (transaction) =>
+        transaction.proprietaryBankTransactionCode.id === accountId,
+    );
+
+    return new AccountTransactionsDto({
+      transactions: transactions.map((transaction) => {
+        return new AccountTransactionDto({
+          id: transaction.id,
+          date: new Date(transaction.date),
+          bookingDateTime: new Date(transaction.bookingDateTime),
+          valueDateTime: new Date(transaction.valueDateTime),
+          status: transaction.status,
+          amount: transaction.amount,
+          currency: transaction.currency,
+          transactionAmount: {
+            amount: transaction.amount,
+            currency: transaction.currency,
+          },
+          reference: transaction.reference,
+          description: transaction.description,
+          transactionInformation: transaction.transactionInformation,
+          isoBankTransactionCode: transaction.isoBankTransactionCode,
+          proprietaryBankTransactionCode:
+            transaction.proprietaryBankTransactionCode,
+          balance: {
+            amount: transaction.balance.balanceAmount.amount,
+            currency: transaction.balance.balanceAmount.currency,
+          },
+          enrichment: transaction.enrichment,
+        });
+      }),
+    });
+  }
+
+  async getAllTransactions(userId: string) {
+    console.log(userId);
+    // const consentToken = await this.getConsentToken(userId);
+    // const resp = await fetch(
+    //   `https://api.yapily.com/accounts/${accountId}/transactions`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       consent: consentId,
+    //       'psu-id': 'string',
+    //       'psu-corporate-id': 'string',
+    //       'psu-ip-address': 'string',
+    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
+    //     },
+    //   },
+    // );
+
+    return new AccountTransactionsDto({
+      transactions: this.demoAccountTransactions.map((transaction) => {
+        return new AccountTransactionDto({
+          id: transaction.id,
+          date: new Date(transaction.date),
+          bookingDateTime: new Date(transaction.bookingDateTime),
+          valueDateTime: new Date(transaction.valueDateTime),
+          status: transaction.status,
+          amount: transaction.amount,
+          currency: transaction.currency,
+          transactionAmount: {
+            amount: transaction.amount,
+            currency: transaction.currency,
+          },
+          reference: transaction.reference,
+          description: transaction.description,
+          transactionInformation: transaction.transactionInformation,
+          isoBankTransactionCode: transaction.isoBankTransactionCode,
+          proprietaryBankTransactionCode:
+            transaction.proprietaryBankTransactionCode,
+          balance: {
+            amount: transaction.balance.balanceAmount.amount,
+            currency: transaction.balance.balanceAmount.currency,
+          },
+          enrichment: transaction.enrichment,
+        });
+      }),
+    });
+  }
+
+  async getMonthlyOutgoingTransactions(userId: string) {
+    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
+    const allTransactions = await this.getAllTransactions(userId);
+
+    const outgoingTransactions = allTransactions.transactions.filter(
+      (transaction) => transaction.amount < 0,
+    );
+
+    const lastMonthOutgoingTransactions = outgoingTransactions.filter(
+      (transaction) =>
+        transaction.date.getTime() >
+        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
+    );
+
+    return new TotalTransactionsDto({
+      transactions: lastMonthOutgoingTransactions,
+      sum: lastMonthOutgoingTransactions.reduce(
+        (sum, transaction) => sum + transaction.amount,
+        0,
+      ),
+    });
+  }
+
+  async getMonthlyIncomingTransactions(userId: string) {
+    const accountsAndBalances = await this.getAccountsAndBalances(userId);
+
+    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
+    const allTransactions = await Promise.all(
+      accountsAndBalances.accounts.map((account) =>
+        this.getAccountTransactions(userId, account.institution.id),
+      ),
+    );
+    const combinedTransactions = allTransactions.flatMap(
+      (accountTransactions) => accountTransactions.transactions,
+    );
+
+    const incomingTransactions = combinedTransactions.filter(
+      (transaction) => transaction.amount > 0,
+    );
+
+    const lastMonthIncomingTransactions = incomingTransactions.filter(
+      (transaction) =>
+        transaction.date.getTime() >
+        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
+    );
+
+    return new TotalTransactionsDto({
+      transactions: lastMonthIncomingTransactions,
+      sum: lastMonthIncomingTransactions.reduce(
+        (sum, transaction) => sum + transaction.amount,
+        0,
+      ),
+    });
+  }
+
+  async getTotalRunwayInMonths(userId: string) {
+    const accountsAndBalances = await this.getAccountsAndBalances(userId);
+    const totalBalance = accountsAndBalances.accounts.reduce(
+      (sum, account) => sum + account.balance,
+      0,
+    );
+
+    const monthlyOutgoingTransactions =
+      await this.getMonthlyOutgoingTransactions(userId);
+    const monthlyIncomingTransactions =
+      await this.getMonthlyIncomingTransactions(userId);
+
+    const burn =
+      monthlyOutgoingTransactions.sum + monthlyIncomingTransactions.sum;
+
+    return new TotalRunwayDto({
+      totalRunway: (totalBalance / burn) * -1,
+      monthlyBurn: burn,
+      monthlyIncoming: monthlyIncomingTransactions.sum,
+      monthlyOutgoing: monthlyOutgoingTransactions.sum,
+      currentBalance: totalBalance,
+    });
+  }
+
+  async getReportsForAccount(userId: string, accountId: string) {
+    const consentToken = await this.getConsentToken(userId);
+
+    const res: ApiResponseOfAccountStatement = await axios.get(
+      `https://api.yapily.com/accounts/${accountId}/statements`,
+      {
+        headers: {
+          consent: consentToken,
+          'psu-id': 'string',
+          'psu-corporate-id': 'string',
+          'psu-ip-address': 'string',
+        },
+      },
+    );
+
+    return res.links;
   }
 
   demoAccountsAndBalances = [
@@ -352,64 +597,6 @@ export class AccountsService {
       },
     },
   ];
-
-  async getAccountsAndBalances(userId: string) {
-    console.log(userId);
-    // const consentToken = await this.getConsentToken(userId);
-    // const res: AccountApiListResponse = await axios(
-    //   `https://api.yapily.com/accounts`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       consent: consentToken,
-    //       'psu-id': 'string',
-    //       'psu-corporate-id': 'string',
-    //       'psu-ip-address': 'string',
-    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
-    //     },
-    //   },
-    // );
-
-    // Mocked + Typesafe Data From Yapily
-    return new AccountsAndBalancesDto({
-      accounts: this.demoAccountsAndBalances.map((account) => {
-        return new AccountAndBalanceDto({
-          id: account.id,
-          type: account.type,
-          balance: account.balance,
-          currency: account.currency,
-          usageType: UsageType.Personal,
-          accountType: AccountType.CashTrading,
-          nickname: account.nickname,
-          accountNames: account.accountNames,
-          accountIdentifications: account.accountIdentifications,
-          accountBalances: account.accountBalances.map((balance) => {
-            return new AccountBalanceDto({
-              dateTime: new Date(balance.dateTime),
-              balanceAmount: balance.balanceAmount,
-              creditLineIncluded: balance.creditLineIncluded,
-              creditLines: balance.creditLines,
-            });
-          }),
-          institution: account.institution
-            ? new InstitutionDto({
-                id: account.institution.id,
-                countries: account.institution.countries,
-                credentialsType: account.institution.credentialsType,
-                environmentType: account.institution.environmentType,
-                features: account.institution.features,
-                fullName: account.institution.fullName,
-                media: account.institution.media,
-                name: account.institution.name,
-                monitoring: account.institution.monitoring,
-              })
-            : null,
-          description: account.type,
-          details: account.type,
-        });
-      }),
-    });
-  }
 
   demoAccountTransactions = [
     {
@@ -930,171 +1117,4 @@ export class AccountsService {
       },
     },
   ];
-
-  async getAccountTransactions(userId: string, accountId: string) {
-    const transactions = this.demoAccountTransactions.filter(
-      (transaction) =>
-        transaction.proprietaryBankTransactionCode.id === accountId,
-    );
-
-    return new AccountTransactionsDto({
-      transactions: transactions.map((transaction) => {
-        return new AccountTransactionDto({
-          id: transaction.id,
-          date: new Date(transaction.date),
-          bookingDateTime: new Date(transaction.bookingDateTime),
-          valueDateTime: new Date(transaction.valueDateTime),
-          status: transaction.status,
-          amount: transaction.amount,
-          currency: transaction.currency,
-          transactionAmount: {
-            amount: transaction.amount,
-            currency: transaction.currency,
-          },
-          reference: transaction.reference,
-          description: transaction.description,
-          transactionInformation: transaction.transactionInformation,
-          isoBankTransactionCode: transaction.isoBankTransactionCode,
-          proprietaryBankTransactionCode:
-            transaction.proprietaryBankTransactionCode,
-          balance: {
-            amount: transaction.balance.balanceAmount.amount,
-            currency: transaction.balance.balanceAmount.currency,
-          },
-          enrichment: transaction.enrichment,
-        });
-      }),
-    });
-  }
-
-  async getAllTransactions(userId: string) {
-    console.log(userId);
-    // const consentToken = await this.getConsentToken(userId);
-    // const resp = await fetch(
-    //   `https://api.yapily.com/accounts/${accountId}/transactions`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       consent: consentId,
-    //       'psu-id': 'string',
-    //       'psu-corporate-id': 'string',
-    //       'psu-ip-address': 'string',
-    //       Authorization: 'Basic ' + btoa('<username>:<password>'),
-    //     },
-    //   },
-    // );
-
-    return new AccountTransactionsDto({
-      transactions: this.demoAccountTransactions.map((transaction) => {
-        return new AccountTransactionDto({
-          id: transaction.id,
-          date: new Date(transaction.date),
-          bookingDateTime: new Date(transaction.bookingDateTime),
-          valueDateTime: new Date(transaction.valueDateTime),
-          status: transaction.status,
-          amount: transaction.amount,
-          currency: transaction.currency,
-          transactionAmount: {
-            amount: transaction.amount,
-            currency: transaction.currency,
-          },
-          reference: transaction.reference,
-          description: transaction.description,
-          transactionInformation: transaction.transactionInformation,
-          isoBankTransactionCode: transaction.isoBankTransactionCode,
-          proprietaryBankTransactionCode:
-            transaction.proprietaryBankTransactionCode,
-          balance: {
-            amount: transaction.balance.balanceAmount.amount,
-            currency: transaction.balance.balanceAmount.currency,
-          },
-          enrichment: transaction.enrichment,
-        });
-      }),
-    });
-  }
-
-  async getMonthlyOutgoingTransactions(userId: string) {
-    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
-    const allTransactions = await this.getAllTransactions(userId);
-
-    const outgoingTransactions = allTransactions.transactions.filter(
-      (transaction) => transaction.amount < 0,
-    );
-
-    const lastMonthOutgoingTransactions = outgoingTransactions.filter(
-      (transaction) =>
-        transaction.date.getTime() >
-        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
-    );
-
-    return new TotalTransactionsDto({
-      transactions: lastMonthOutgoingTransactions,
-      sum: lastMonthOutgoingTransactions.reduce(
-        (sum, transaction) => sum + transaction.amount,
-        0,
-      ),
-    });
-  }
-
-  async getMonthlyIncomingTransactions(userId: string) {
-    const accountsAndBalances = await this.getAccountsAndBalances(userId);
-
-    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
-    const allTransactions = await Promise.all(
-      accountsAndBalances.accounts.map((account) =>
-        this.getAccountTransactions(userId, account.institution.id),
-      ),
-    );
-    const combinedTransactions = allTransactions.flatMap(
-      (accountTransactions) => accountTransactions.transactions,
-    );
-
-    const incomingTransactions = combinedTransactions.filter(
-      (transaction) => transaction.amount > 0,
-    );
-
-    const lastMonthIncomingTransactions = incomingTransactions.filter(
-      (transaction) =>
-        transaction.date.getTime() >
-        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
-    );
-
-    return new TotalTransactionsDto({
-      transactions: lastMonthIncomingTransactions,
-      sum: lastMonthIncomingTransactions.reduce(
-        (sum, transaction) => sum + transaction.amount,
-        0,
-      ),
-    });
-  }
-
-  async getTotalRunwayInMonths(userId: string) {
-    const accountsAndBalances = await this.getAccountsAndBalances(userId);
-    const totalBalance = accountsAndBalances.accounts.reduce(
-      (sum, account) => sum + account.balance,
-      0,
-    );
-
-    const monthlyOutgoingTransactions =
-      await this.getMonthlyOutgoingTransactions(userId);
-    const monthlyIncomingTransactions =
-      await this.getMonthlyIncomingTransactions(userId);
-
-    const burn =
-      monthlyOutgoingTransactions.sum + monthlyIncomingTransactions.sum;
-
-    console.log(`Incoming: ${monthlyIncomingTransactions.sum}`);
-    console.log(`Outgoing: ${monthlyOutgoingTransactions.sum}`);
-    console.log(`Total Balance: ${totalBalance}`);
-    console.log(`Burn: ${burn}`);
-
-    return new TotalRunwayDto({
-      totalRunway: (totalBalance / burn) * -1,
-      monthlyBurn: burn,
-      monthlyIncoming: monthlyIncomingTransactions.sum,
-      monthlyOutgoing: monthlyOutgoingTransactions.sum,
-      currentBalance: totalBalance,
-    });
-  }
 }
