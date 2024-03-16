@@ -49,4 +49,14 @@ export class AccountsController {
       'demoAccountId',
     );
   }
+
+  @Post('getMonthlyOutgoingTransactions')
+  async getMonthlyOutgoingTransactions(): Promise<AccountTransactionsDto> {
+    return this.accountsService.getMonthlyOutgoingTransactions('demoUserId');
+  }
+
+  @Post('getMonthlyIncomingTransactions')
+  async getMonthlyIncomingTransactions(): Promise<AccountTransactionsDto> {
+    return this.accountsService.getMonthlyIncomingTransactions('demoUserId');
+  }
 }

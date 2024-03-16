@@ -301,14 +301,14 @@ export class AccountsService {
   demoAccountTransactions = [
     {
       id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
-      date: '2021-05-06T17:44:34.589Z',
-      bookingDateTime: '2021-05-06T17:44:34.589Z',
-      valueDateTime: '2021-05-06T17:44:34.589Z',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
       status: TransactionStatusEnum.Booked,
-      amount: -100.23,
+      amount: -50.23,
       currency: 'GBP',
       transactionAmount: {
-        amount: -100.23,
+        amount: -50.23,
         currency: 'GBP',
       },
       reference: '0',
@@ -338,7 +338,7 @@ export class AccountsService {
       balance: {
         type: 'CLOSING_AVAILABLE',
         balanceAmount: {
-          amount: 426.53,
+          amount: 1426530.0,
           currency: 'GBP',
         },
       },
@@ -350,14 +350,14 @@ export class AccountsService {
     },
     {
       id: 'e3f532f9-41d4-45c7-8be3-6829320d9d25',
-      date: '2021-07-12T09:20:50.123Z',
-      bookingDateTime: '2021-07-12T09:20:50.123Z',
-      valueDateTime: '2021-07-12T09:20:50.123Z',
+      date: '2024-03-05T09:20:50.123Z',
+      bookingDateTime: '2024-03-05T09:20:50.123Z',
+      valueDateTime: '2024-03-05T09:20:50.123Z',
       status: TransactionStatusEnum.Booked,
-      amount: 75.6,
+      amount: 35.6,
       currency: 'USD',
       transactionAmount: {
-        amount: 75.6,
+        amount: 35.6,
         currency: 'USD',
       },
       reference: '123456',
@@ -384,7 +384,7 @@ export class AccountsService {
       balance: {
         type: 'CLOSING_AVAILABLE',
         balanceAmount: {
-          amount: 900.25,
+          amount: 1900250.0,
           currency: 'USD',
         },
       },
@@ -396,14 +396,14 @@ export class AccountsService {
     },
     {
       id: '03e9f86b-f3f8-4f3a-8d45-9ff3f7d6c8a2',
-      date: '2021-08-25T14:37:01.789Z',
-      bookingDateTime: '2021-08-25T14:37:01.789Z',
-      valueDateTime: '2021-08-25T14:37:01.789Z',
+      date: '2024-03-10T14:37:01.789Z',
+      bookingDateTime: '2024-03-10T14:37:01.789Z',
+      valueDateTime: '2024-03-10T14:37:01.789Z',
       status: TransactionStatusEnum.Booked,
-      amount: -45.99,
+      amount: -20.99,
       currency: 'EUR',
       transactionAmount: {
-        amount: -45.99,
+        amount: -20.99,
         currency: 'EUR',
       },
       reference: '789012',
@@ -430,7 +430,7 @@ export class AccountsService {
       balance: {
         type: 'CLOSING_AVAILABLE',
         balanceAmount: {
-          amount: 350.76,
+          amount: 35076.0,
           currency: 'EUR',
         },
       },
@@ -442,14 +442,14 @@ export class AccountsService {
     },
     {
       id: '1c5e9c7a-e8d7-4c7b-b7ac-6f26e7c0fc2a',
-      date: '2021-10-17T18:55:23.456Z',
-      bookingDateTime: '2021-10-17T18:55:23.456Z',
-      valueDateTime: '2021-10-17T18:55:23.456Z',
+      date: '2024-03-20T18:55:23.456Z',
+      bookingDateTime: '2024-03-20T18:55:23.456Z',
+      valueDateTime: '2024-03-20T18:55:23.456Z',
       status: TransactionStatusEnum.Booked,
-      amount: 120.35,
+      amount: 40.35,
       currency: 'GBP',
       transactionAmount: {
-        amount: 120.35,
+        amount: 40.35,
         currency: 'GBP',
       },
       reference: '567890',
@@ -476,7 +476,7 @@ export class AccountsService {
       balance: {
         type: 'CLOSING_AVAILABLE',
         balanceAmount: {
-          amount: 350.76,
+          amount: 35076.0,
           currency: 'EUR',
         },
       },
@@ -529,6 +529,62 @@ export class AccountsService {
           enrichment: transaction.enrichment,
         });
       }),
+    });
+  }
+
+  async getMonthlyOutgoingTransactions(userId: string) {
+    const accountsAndBalances = await this.getAccountsAndBalances(userId);
+
+    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
+    const allTransactions = await Promise.all(
+      accountsAndBalances.accounts.map((account) =>
+        this.getAccountTransactions(userId, account.id),
+      ),
+    );
+    const combinedTransactions = allTransactions.flatMap(
+      (accountTransactions) => accountTransactions.transactions,
+    );
+
+    const outgoingTransactions = combinedTransactions.filter(
+      (transaction) => transaction.amount < 0,
+    );
+
+    const lastMonthOutgoingTransactions = outgoingTransactions.filter(
+      (transaction) =>
+        transaction.date.getTime() >
+        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
+    );
+
+    return new AccountTransactionsDto({
+      transactions: lastMonthOutgoingTransactions,
+    });
+  }
+
+  async getMonthlyIncomingTransactions(userId: string) {
+    const accountsAndBalances = await this.getAccountsAndBalances(userId);
+
+    // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
+    const allTransactions = await Promise.all(
+      accountsAndBalances.accounts.map((account) =>
+        this.getAccountTransactions(userId, account.id),
+      ),
+    );
+    const combinedTransactions = allTransactions.flatMap(
+      (accountTransactions) => accountTransactions.transactions,
+    );
+
+    const incomingTransactions = combinedTransactions.filter(
+      (transaction) => transaction.amount > 0,
+    );
+
+    const lastMonthIncomingTransactions = incomingTransactions.filter(
+      (transaction) =>
+        transaction.date.getTime() >
+        new Date(new Date().setMonth(new Date().getMonth() - 1)).getTime(),
+    );
+
+    return new AccountTransactionsDto({
+      transactions: lastMonthIncomingTransactions,
     });
   }
 }
