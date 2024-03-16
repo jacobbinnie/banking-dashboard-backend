@@ -425,11 +425,8 @@ export class AccountsService {
         currency: 'GBP',
       },
       reference: '0',
-      description:
-        'Debit for Payment Id: sdp-1-57379a43-c4b8-49f5-bd7c-699189ee7a60',
-      transactionInformation: [
-        'Debit for Payment Id: sdp-1-57379a43-c4b8-49f5-bd7c-699189ee7a60',
-      ],
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
       isoBankTransactionCode: {
         domainCode: {
           code: 'PMNT',
@@ -474,8 +471,8 @@ export class AccountsService {
         currency: 'USD',
       },
       reference: '123456',
-      description: 'Credit for Sale',
-      transactionInformation: ['Credit for Sale'],
+      description: 'Rendered work for ABC Accounting ltd',
+      transactionInformation: ['Accounting Services'],
       isoBankTransactionCode: {
         domainCode: {
           code: 'SALE',
