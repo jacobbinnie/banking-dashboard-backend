@@ -44,11 +44,15 @@ export class AccountsController {
   }
 
   @Post('getAccountTransactions')
-  async getAccountTransactions(): Promise<AccountTransactionsDto> {
-    return this.accountsService.getAccountTransactions(
-      'demoUserId',
-      'demoAccountId',
-    );
+  async getAccountTransactions(
+    @Body() { accountId }: { accountId: 'string' },
+  ): Promise<AccountTransactionsDto> {
+    return this.accountsService.getAccountTransactions('demoUserId', accountId);
+  }
+
+  @Post('getAllTransactions')
+  async getAllTransactions(): Promise<AccountTransactionsDto> {
+    return this.accountsService.getAllTransactions('demoUserId');
   }
 
   @Post('getMonthlyOutgoingTransactions')

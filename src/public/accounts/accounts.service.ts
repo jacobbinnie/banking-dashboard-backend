@@ -147,7 +147,7 @@ export class AccountsService {
         },
       ],
       institution: {
-        id: 'test',
+        id: '3',
         countries: [
           {
             displayName: 'United Kingdom',
@@ -207,11 +207,11 @@ export class AccountsService {
         },
       ],
       institution: {
-        id: 'test',
+        id: '1',
         countries: [
           {
-            displayName: 'United Kingdom',
-            countryCode2: 'GB',
+            displayName: 'United States',
+            countryCode2: 'US',
           },
         ],
         credentialsType: CredentialsType.OpenBankingUkAuto,
@@ -267,11 +267,11 @@ export class AccountsService {
         },
       ],
       institution: {
-        id: 'test',
+        id: '5',
         countries: [
           {
-            displayName: 'United Kingdom',
-            countryCode2: 'GB',
+            displayName: 'Germany',
+            countryCode2: 'GER',
           },
         ],
         credentialsType: CredentialsType.OpenBankingUkAuto,
@@ -327,7 +327,7 @@ export class AccountsService {
         },
       ],
       institution: {
-        id: 'test',
+        id: '7',
         countries: [
           {
             displayName: 'United Kingdom',
@@ -444,6 +444,336 @@ export class AccountsService {
       proprietaryBankTransactionCode: {
         code: 'HSBC',
         issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
+      },
+      balance: {
+        type: 'CLOSING_AVAILABLE',
+        balanceAmount: {
+          amount: 1426530.0,
+          currency: 'GBP',
+        },
+      },
+      enrichment: {
+        transactionHash: {
+          hash: 'adad72d7b3069ab9e4a6cb2844e2e3e9.1',
+        },
+      },
+    },
+    {
+      id: '49d6e5c6-0130-46e3-884b-1b185432d9e0',
+      date: '2024-03-01T17:44:34.589Z',
+      bookingDateTime: '2024-03-01T17:44:34.589Z',
+      valueDateTime: '2024-03-01T17:44:34.589Z',
+      status: TransactionStatusEnum.Booked,
+      amount: -5045.23,
+      currency: 'GBP',
+      transactionAmount: {
+        amount: -5045.23,
+        currency: 'GBP',
+      },
+      reference: '0',
+      description: 'Debit for Payment Id: sdp-1',
+      transactionInformation: ['Jira Subscription'],
+      isoBankTransactionCode: {
+        domainCode: {
+          code: 'PMNT',
+          name: 'Payments',
+        },
+        familyCode: {
+          code: 'ICDT',
+          name: 'Issued Credit Transfers',
+        },
+        subFamilyCode: {
+          code: 'DMCT',
+          name: 'Domestic Credit Transfer',
+        },
+      },
+      proprietaryBankTransactionCode: {
+        code: 'HSBC',
+        issuer: 'hsbc-bank',
+        id: '3',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -490,6 +820,7 @@ export class AccountsService {
       proprietaryBankTransactionCode: {
         code: 'CHASE',
         issuer: 'jp-morgan-chase',
+        id: '1',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -536,6 +867,7 @@ export class AccountsService {
       proprietaryBankTransactionCode: {
         code: 'UNI',
         issuer: 'unicredit-bank',
+        id: '5',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -582,6 +914,7 @@ export class AccountsService {
       proprietaryBankTransactionCode: {
         code: 'HSBC',
         issuer: 'hsbc-bank',
+        id: '3',
       },
       balance: {
         type: 'CLOSING_AVAILABLE',
@@ -599,7 +932,43 @@ export class AccountsService {
   ];
 
   async getAccountTransactions(userId: string, accountId: string) {
-    console.log(userId, accountId);
+    const transactions = this.demoAccountTransactions.filter(
+      (transaction) =>
+        transaction.proprietaryBankTransactionCode.id === accountId,
+    );
+
+    return new AccountTransactionsDto({
+      transactions: transactions.map((transaction) => {
+        return new AccountTransactionDto({
+          id: transaction.id,
+          date: new Date(transaction.date),
+          bookingDateTime: new Date(transaction.bookingDateTime),
+          valueDateTime: new Date(transaction.valueDateTime),
+          status: transaction.status,
+          amount: transaction.amount,
+          currency: transaction.currency,
+          transactionAmount: {
+            amount: transaction.amount,
+            currency: transaction.currency,
+          },
+          reference: transaction.reference,
+          description: transaction.description,
+          transactionInformation: transaction.transactionInformation,
+          isoBankTransactionCode: transaction.isoBankTransactionCode,
+          proprietaryBankTransactionCode:
+            transaction.proprietaryBankTransactionCode,
+          balance: {
+            amount: transaction.balance.balanceAmount.amount,
+            currency: transaction.balance.balanceAmount.currency,
+          },
+          enrichment: transaction.enrichment,
+        });
+      }),
+    });
+  }
+
+  async getAllTransactions(userId: string) {
+    console.log(userId);
     // const consentToken = await this.getConsentToken(userId);
     // const resp = await fetch(
     //   `https://api.yapily.com/accounts/${accountId}/transactions`,
@@ -625,7 +994,10 @@ export class AccountsService {
           status: transaction.status,
           amount: transaction.amount,
           currency: transaction.currency,
-          transactionAmount: transaction.transactionAmount,
+          transactionAmount: {
+            amount: transaction.amount,
+            currency: transaction.currency,
+          },
           reference: transaction.reference,
           description: transaction.description,
           transactionInformation: transaction.transactionInformation,
@@ -643,19 +1015,10 @@ export class AccountsService {
   }
 
   async getMonthlyOutgoingTransactions(userId: string) {
-    const accountsAndBalances = await this.getAccountsAndBalances(userId);
-
     // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
-    const allTransactions = await Promise.all(
-      accountsAndBalances.accounts.map((account) =>
-        this.getAccountTransactions(userId, account.id),
-      ),
-    );
-    const combinedTransactions = allTransactions.flatMap(
-      (accountTransactions) => accountTransactions.transactions,
-    );
+    const allTransactions = await this.getAllTransactions(userId);
 
-    const outgoingTransactions = combinedTransactions.filter(
+    const outgoingTransactions = allTransactions.transactions.filter(
       (transaction) => transaction.amount < 0,
     );
 
@@ -680,7 +1043,7 @@ export class AccountsService {
     // Due to the hardcoded mock data, transactions will be duplicated. In a real world scenario, we would retrieve transactions per account individually.
     const allTransactions = await Promise.all(
       accountsAndBalances.accounts.map((account) =>
-        this.getAccountTransactions(userId, account.id),
+        this.getAccountTransactions(userId, account.institution.id),
       ),
     );
     const combinedTransactions = allTransactions.flatMap(
