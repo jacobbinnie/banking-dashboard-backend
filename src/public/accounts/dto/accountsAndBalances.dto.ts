@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 import { Dto } from 'src/lib/dto/Dto';
-import { Institution } from 'src/types/dist';
 import {
   AccountName,
   AccountType,
